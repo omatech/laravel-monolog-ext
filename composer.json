@@ -1,0 +1,62 @@
+{
+    "name": "omatech/laravel-monolog-ext",
+    "description": "Extension Monolog Logging",
+    "keywords": [
+        "omatech",
+        "laravel-monolog-ext"
+    ],
+    "homepage": "https://github.com/omatech/laravel-monolog-ext",
+    "license": "MIT",
+    "type": "library",
+    "authors": [
+        {
+            "name": "Cesc Delgado",
+            "email": "cdelgado@omatech.com",
+            "role": "Developer"
+        },
+        {
+            "name": "Christian Bohollo",
+            "email": "cbohollo@omatech.com",
+            "role": "Developer"
+        },
+        {
+            "name": "Adrià Roca",
+            "email": "a.roca.rada@gmail.com",
+            "role": "Developer"
+        }
+    ],
+    "require": {
+        "php": ">=7.0.0",
+        "illuminate/support": "5.5.*",
+        "aws/aws-sdk-php-laravel": "^3.3",
+        "maxbanton/cwh": "^1.1"
+    },
+    "require-dev": {
+        "orchestra/testbench": "3.8.*",
+        "phpunit/phpunit": "^7.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "Omatech\\LaravelMonologExt\\": "src"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Omatech\\LaravelMonologExt\\Tests\\": "tests"
+        }
+    },
+    "scripts": {
+        "test": "vendor/bin/phpunit",
+        "test-coverage": "vendor/bin/phpunit --coverage-html coverage"
+    },
+    "config": {
+        "sort-packages": true
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Omatech\\LaravelMonologExt\\LaravelMonologExtServiceProvider"
+            ]
+        }
+    }
+}
