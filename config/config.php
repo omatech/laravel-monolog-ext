@@ -1,9 +1,10 @@
 <?php
 
-/*
- * You can place your custom package configuration in here.
- */
-
 return [
-    'logging-service' => Omatech\LaravelMonologExt\CloudWatch\CloudWatchLaravelLogging::class
+    'default' => env('LOG_SYSTEM', 'file'),
+
+    'systems' => [
+        'cloudwatch' => Omatech\LaravelMonologExt\CloudWatch\CloudWatchLaravelLogging::class,
+        'file' => Omatech\LaravelMonologExt\File\FileLaravelLogging::class
+    ]
 ];

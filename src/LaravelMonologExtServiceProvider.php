@@ -4,7 +4,6 @@ namespace Omatech\LaravelMonologExt;
 
 use Illuminate\Support\ServiceProvider;
 use Omatech\LaravelMonologExt\Contracts\MonologLogging;
-use Omatech\LaravelMonologExt\CloudWatch\CloudWatchLaravelLogging;
 
 class LaravelMonologExtServiceProvider extends ServiceProvider
 {
@@ -20,7 +19,9 @@ class LaravelMonologExtServiceProvider extends ServiceProvider
             ], 'config');
         }
 
-        $this->app->bind(MonologLogging::class, config('laravel-monolog-ext.logging-service'));
+        $system = config('laravel-monolog-ext.default');
+
+        $this->app->bind(MonologLogging::class, config('laravel-monolog-ext.systems')[$system]);
     }
 
     /**

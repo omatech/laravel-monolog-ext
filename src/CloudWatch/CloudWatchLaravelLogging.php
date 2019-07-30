@@ -14,7 +14,7 @@ class CloudWatchLaravelLogging implements MonologLogging
     public function __construct()
     {
         $cwClient = App::make('aws')->createClient('CloudWatchLogs');
-        $cwGroupName = '/mediktiv/' . strtolower(env('APP_ENV')) . '/' . strtolower(env('APP_NAME'));
+        $cwGroupName = 'mediktiv/' . env('APP_ENV') . '/' . env('APP_NAME');
         $cwStreamNameApp = 'laravel-' . now()->toDateString() . '.log';
         $cwRetentionDays = 90;
         $this->cwHandlerApp = new CloudWatch($cwClient, $cwGroupName, $cwStreamNameApp, $cwRetentionDays);
