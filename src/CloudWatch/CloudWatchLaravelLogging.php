@@ -2,22 +2,24 @@
 
 namespace Omatech\LaravelMonologExt\CloudWatch;
 
+use Exception;
 use Illuminate\Support\Facades\App;
 use Monolog\Formatter\LineFormatter;
 use Maxbanton\Cwh\Handler\CloudWatch;
-use Omatech\LaravelMonologExt\Contracts\MonologLogging;
+use Omatech\LaravelMonologExt\Contracts\MonologLoggingChild;
 
-class CloudWatchLaravelLogging implements MonologLogging
+class CloudWatchLaravelLogging implements MonologLoggingChild
 {
     protected $cwHandlerApp;
 
     public function __construct()
     {
         $cwClient = App::make('aws')->createClient('CloudWatchLogs');
-        $cwGroupName = 'mediktiv/' . env('APP_ENV') . '/' . env('APP_NAME');
+        $cwGroupName = config('laravel-monolog-ext.drivers.cloudwatch.group') . '/' . strtolower(env('APP_ENV'));
         $cwStreamNameApp = 'laravel-' . now()->toDateString() . '.log';
-        $cwRetentionDays = 90;
-        $this->cwHandlerApp = new CloudWatch($cwClient, $cwGroupName, $cwStreamNameApp, $cwRetentionDays);
+        $cwRetentionDays = config('laravel-monolog-ext.drivers.cloudwatch.retention');
+        $cwLevel = config('laravel-monolog-ext.drivers.cloudwatch.level');
+        $this->cwHandlerApp = new CloudWatch($cwClient, $cwGroupName, $cwStreamNameApp, $cwRetentionDays, 10000, [], $cwLevel);
     }
 
     public function pushHandler(\Monolog\Logger $monolog)

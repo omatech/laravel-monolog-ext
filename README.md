@@ -33,13 +33,22 @@ If you want to add another service, you need to publish the config file.
 php artisan vendor:publish  --provider="Omatech\LaravelMonologExt\LaravelMonologExtServiceProvider"
 ```
 
-The settings can be found in the generated `config/laravel-monolog-ext.php` configuration file. By default, you have the CloudWatch service.
+The settings can be found in the generated `config/laravel-monolog-ext.php` configuration file..
+Now you have two options:
 
-```php
-return [
-    'logging-service' => Omatech\LaravelMonologExt\CloudWatch\CloudWatchLaravelLogging::class
-];
-```
+* APP_LOG_DRIVER_AWS
+* APP_LOG_DRIVER_FILE
+
+You need to put true this enviroments if you want to use.
+
+###CloudWatch
+* APP_LOG_DRIVER_AWS: true / false
+* APP_LOG_DRIVER_AWS_GROUP: string
+* APP_LOG_LEVEL: same options of log level monologging. default: debug
+* APP_LOG_RETENTION: days. default: 140
+
+###File
+* APP_LOG_LEVEL: same options of log level monologging. default: debug
 
 ### Changelog
 

@@ -19,9 +19,7 @@ class LaravelMonologExtServiceProvider extends ServiceProvider
             ], 'config');
         }
 
-        $system = config('laravel-monolog-ext.default');
-
-        $this->app->bind(MonologLogging::class, config('laravel-monolog-ext.systems')[$system]);
+        $this->app->bind(MonologLogging::class, LoggingMaster::class);
     }
 
     /**
