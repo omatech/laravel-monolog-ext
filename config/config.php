@@ -13,7 +13,7 @@ if (env('APP_LOG_DRIVER_AWS', false)) {
     ];
 }
 
-if (env('APP_LOG_DRIVER_FILE', false)) {
+if (env('APP_LOG_DRIVER_FILE', true)) {
     $data['drivers']['file'] = [
         'level' => env('APP_LOG_LEVEL', 'debug'),
         'class' => Omatech\LaravelMonologExt\File\FileLaravelLogging::class
