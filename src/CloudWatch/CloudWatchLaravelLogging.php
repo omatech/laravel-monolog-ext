@@ -15,10 +15,11 @@ class CloudWatchLaravelLogging implements MonologLoggingChild
     public function __construct()
     {
         $cwClient = App::make('aws')->createClient('CloudWatchLogs');
-        $cwGroupName = config('laravel-monolog-ext.drivers.cloudwatch.group') . '/' . strtolower(env('APP_NAME'));
+        $cwGroupName = config('laravel-monolog-ext.drivers.cloudwatch.group');
         $cwStreamNameApp = 'laravel-' . now()->toDateString() . '.log';
         $cwRetentionDays = config('laravel-monolog-ext.drivers.cloudwatch.retention');
         $cwLevel = config('laravel-monolog-ext.drivers.cloudwatch.level');
+
         $this->cwHandlerApp = new CloudWatch($cwClient, $cwGroupName, $cwStreamNameApp, $cwRetentionDays, 10000, [], $cwLevel);
     }
 
