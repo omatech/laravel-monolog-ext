@@ -5,9 +5,11 @@ if (env('APP_LOG_DRIVER_AWS', false)) {
     if (empty(env('APP_LOG_DRIVER_AWS_GROUP'))) {
         throw new Exception('No defined APP_LOG_DRIVER_AWS_GROUP');
     }
-    $group = env('APP_LOG_DRIVER_AWS_GROUP') . '/' . strtolower(env('SERVICE_NAME'));
+    $group = env('APP_LOG_DRIVER_AWS_GROUP');
     if (!empty(env('SERVICE_NAME_CONTAINER'))) {
         $group .= '/'.env('SERVICE_NAME_CONTAINER');
+    } else {
+        $group .= '/'.env('SERVICE_NAME');
     }
     $data['drivers']['cloudwatch'] = [
         'group' => $group,
