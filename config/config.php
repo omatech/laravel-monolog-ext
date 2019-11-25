@@ -14,6 +14,7 @@ if (env('APP_LOG_DRIVER_AWS', false)) {
     $data['drivers']['cloudwatch'] = [
         'group' => $group,
         'level' => env('APP_LOG_LEVEL', 'debug'),
+        'batch-size' => env('APP_LOG_BATCH_SIZE', 10),
         'retention' => env('APP_LOG_RETENTION', 140),
         'class' => Omatech\LaravelMonologExt\CloudWatch\CloudWatchLaravelLogging::class,
     ];
